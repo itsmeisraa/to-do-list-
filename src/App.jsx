@@ -3,7 +3,8 @@
 function App(){
   return(
     <>
-      <>Simpple todo app</> 
+      <h1>Simpple todo app</h1> 
+
     </>
   )
 }
