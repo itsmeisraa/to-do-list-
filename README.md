@@ -1,92 +1,39 @@
-# 🚀 create-rvst
+# To-Do List & Pomodoro Timer Web App
 
-A modern CLI tool to scaffold a new **RVST-Stack** project using **Vite**, **React**, **Shadcn UI**, and **Tailwind CSS**.
-
-## 🌟 Features
-
-- ⚡ **Vite** - Lightning-fast build tool and dev server
-- ⚛️ **React** - Popular UI library for building user interfaces
-- 🎨 **Shadcn UI** - High-quality, accessible component system
-- 🌊 **Tailwind CSS** - Utility-first CSS framework
-- 🔥 **Hot Module Replacement (HMR)** - Instant feedback during development
-- 🧪 **ESLint** - Code linting for best practices
+This is a **React-based web app** combining a To-Do List, Pomodoro Timer, and Contact section. It features a dynamic Vanta.js background, smooth scrolling navigation, and local storage persistence.
 
 ---
 
-## 📚 Installation
+## Features
 
-To create a new **RVST-Stack** project, run:
+- 📝 **To-Do List**  
+  - Add, delete, and reorder tasks (move up/down).  
+  - Tasks are saved in **local storage**, so they persist across page refreshes.  
 
-```sh
-npx create-rvst my-app
-```
+- ⏱ **Pomodoro Timer**  
+  - Standard 25-minute timer with start, stop, reset, and 5-minute break options.  
+  - Alarm plays when the timer finishes.  
+  - Timer state is stored in **local storage**, so refreshing the page won’t reset it.
 
-or using **npm**:
+- 💡 **Promologue Section**  
+  - Motivational quotes displayed alongside the Pomodoro timer.  
 
-```sh
-npm create rvst my-app
-```
+- 📧 **Contact Section**  
+  - Display emails of the creators with hover effects and optional contact images.  
 
-Then navigate to your project and start the development server:
+- 🌐 **Responsive Design**  
+  - Works well on desktop and mobile devices.  
+  - Navbar scrolls smoothly to sections.  
+  - Mobile layout stacks content and adjusts button sizes for touch.
 
-```sh
-cd my-app
-npm run dev
-```
-
-Open your browser and go to **[http://localhost:5173](http://localhost:5173)**.
-
----
-
-## 📁 Project Structure
-
-```
-my-app/
-├── src/
-│   ├── App.jsx
-│   ├── components/
-│   ├── styles/
-│   │   └── main.css
-│   └── index.css
-├── public/
-├── package.json
-├── vite.config.js
-├── README.md
-└── .eslintrc.json
-```
+- 🐦 **Animated Background**  
+  - Interactive Vanta.js birds animation behind all sections.
 
 ---
 
-## 🛠️ Tech Stack
+## Installation
 
-| Technology  | Description |
-|-------------|------------|
-| [React](https://react.dev/) | JavaScript library for UI development |
-| [Vite](https://vitejs.dev/) | Fast build tool and dev server |
-| [Shadcn UI](https://ui.shadcn.com/) | Pre-styled accessible UI components |
-| [Tailwind CSS](https://tailwindcss.com/) | Utility-first CSS framework |
-| [ESLint](https://eslint.org/) | Code linting and formatting |
+1. Clone this repository:
 
----
-
-## 🔌 Vite Plugins Used
-
-| Plugin | Description |
-|--------|------------|
-| `@vitejs/plugin-react` | Uses Babel for Fast Refresh |
-| `@vitejs/plugin-react-swc` | Uses SWC for Fast Refresh |
-
----
-
-## 🤝 Contributing
-
-Contributions, issues, and feature requests are welcome!  
-Feel free to **fork** this repo and submit a PR. 🚀
-
----
-
-## 📝 License
-
-This project is licensed under the **MIT License**.  
-See [LICENSE](LICENSE) for more details.
-
+```bash
+git clone https://github.com/your-username/your-repo.git
