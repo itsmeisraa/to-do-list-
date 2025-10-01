@@ -1,5 +1,6 @@
 // welcome.jsx
-import { useEffect } from 'react';
+import { useEffect } from 'react'
+import { Typewriter } from 'react-simple-typewriter'
 
 function Welcome() {
     useEffect(() => {
@@ -12,7 +13,7 @@ function Welcome() {
         // Load Three.js
         const threeScript = document.createElement('script');
         threeScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js';
-        
+
         // Load Vanta.js after Three.js is loaded
         threeScript.onload = () => {
             const vantaScript = document.createElement('script');
@@ -20,7 +21,7 @@ function Welcome() {
             vantaScript.onload = initVanta;
             document.head.appendChild(vantaScript);
         };
-        
+
         document.head.appendChild(threeScript);
 
         function initVanta() {
@@ -46,7 +47,6 @@ function Welcome() {
 
         // Cleanup
         return () => {
-            // Remove any existing Vanta instances
             if (window.VANTA && window.VANTA.current) {
                 window.VANTA.current.destroy();
             }
@@ -54,11 +54,39 @@ function Welcome() {
     }, []);
 
     return (
-        <div id="vanta-background" style={{ width: '100%', height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <h1 style={{ color: 'white', zIndex: 20 }}>Welcome to l3alamya
+        <div 
+            id="vanta-background" 
+            style={{ width: '100%', height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' , fontFamily: '"Lora", serif',
+                textShadow: '0 0 10px rgba(0,0,0,0.7)' , background: 'linear-gradient(90deg, #ff0001, #ff9800)' , padding: '10px 20px' ,  borderRadius: '10px' , 
+                fontSize: '3rem' , fontWeight: '700' 
+            }}
+        >
+            <h1   style={{
+    zIndex: 20,
+    fontSize: '2rem',          // a bit smaller than h1
+    fontWeight: '500',           // lighter than bold
+    background: '#FFFF',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    fontFamily: 'sans-serif',  // clean default ,
+    fontWeight: 'bold'
+  }}
+>
+                <Typewriter
+                    words={[
+    'Welcome to your To-Do List',
+    'Plan. Do. Achieve.',
+    'Stay Organized, Stay Productive.'
+  ]}
+                    loop={true}       // only type once
+                    typeSpeed={100}    // speed of typing (ms per character)
+                    deleteSpeed={60}   // not needed if loop=false
+                    delaySpeed={1000}  // delay before delete (if loop true)
+                />
             </h1>
         </div>
+        
     );
 }
 
-export default Welcome;
+export default Welcome
