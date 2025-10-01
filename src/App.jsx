@@ -1,12 +1,12 @@
 
+import Welcome from './welcome.jsx';
 
-function App(){
-  return(
-    <>
-      <h1>Simpple todo app</h1> 
-
-    </>
-  )
+function App() {
+    return (
+        <div>
+            <Welcome />
+        </div>
+    );
 }
 
 export default App;
