@@ -344,468 +344,314 @@ function Welcome() {
       {/* CSS */}
       <style>
         {`
-          /* Scroll arrow bounce */
-          @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-10px); }
-            60% { transform: translateY(-5px); }
-          }
+          /* ========== General / Desktop Styles ========== */
 
-          /* Navbar */
-          .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(0,0,0,0.6);
-            padding: 10px 0;
-            z-index: 100;
-            display: flex;
-            justify-content: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.4);
-          }
-          .navbar ul {
-            list-style: none;
-            display: flex;
-            gap: 30px;
-            margin: 0;
-            padding: 0;
-          }
-          .navbar ul li a {
-            color: white;
-            text-decoration: none;
-            font-family: "Lora", serif;
-            font-size: 18px;
-            text-shadow: 1px 2px 10px rgba(0,0,0,0.7);
-            position: relative;
-            transition: color 0.3s ease;
-          }
-          .navbar ul li a::after {
-            content: '';
-            position: absolute;
-            width: 0%;
-            height: 2px;
-            bottom: -3px;
-            left: 0;
-            background-color: white;
-            transition: width 0.3s ease;
-          }
-          .navbar ul li a:hover::after {
-            width: 100%;
-          }
-          .navbar ul li a:hover {
-            color: #DD6CE6;
-          }
+html {
+  scroll-behavior: smooth;
+}
 
-          html {
-            scroll-behavior: smooth;
-          }
-
-          /* Todo List */
-          ul.todo-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            width: 100%;
-          }
-          ul.todo-list li {
-            background: rgba(255,255,255,0.1);
-            padding: 10px 15px;
-            border-radius: 6px;
-            margin-bottom: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-          }
-
-          .todo-title {
-          cursor:default;
-            margin-bottom: 1rem;
-            text-align: center;
-            font-size: 45px;
-            transition: text-shadow 0.3s ease;
-          }
-          .todo-title:hover {
-            text-shadow: 1px 2px 10px white;
-          }
-
-          .todo-sub {
-          cursor:default;
-            margin-bottom: 1rem;
-            text-align: center;
-            font-size: 20px;
-            transition: text-shadow 0.3s ease;
-          }
-          .todo-sub:hover {
-            text-shadow: 1px 2px 10px white;
-          }
-
-          .input {
-            border-radius: 6px;
-            border: none;
-            background-color: #f5f5f5;
-            padding: 8px 12px;
-            width: 200px;
-            outline: none;
-            transition: box-shadow 0.3s;
-            color: black;
-          }
-          .input:focus {
-            box-shadow: 0 0 10px #4fa138;
-          }
-
-          .todo-btn {
-            background: #DD6CE6;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 6px;
-            cursor: pointer;
-            color: white;
-            font-weight: bold;
-            font-size: 20px;
-            margin-left: 5px;
-            transition: all 0.3s ease;
-          }
-          .todo-btn:hover {
-            background: #AB4CB5;
-            transform: translateY(-2px) scale(1.05);
-          }
-
-          /* Chronometer circle */
-          .timer-box {
-            margin-top: 2rem;
-            width: 160px;
-            height: 160px;
-            line-height: 160px;
-            border-radius: 50%;
-            text-align: center;
-            font-size: 2rem;
-            font-weight: 700;
-            color: white;
-            background: rgba(255,255,255,0.1);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-            font-family: "Courier New", Courier, monospace;
-            cursor: pointer;
-            transition: background 0.3s ease, transform 0.3s ease;
-            animation: pulse 1500ms infinite;
-          }
-          @keyframes pulse {
-            0%,100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-          }
-          .timer-box:hover {
-            background: rgba(255,255,255,0.25);
-            animation: none;
-          }
-
-          .timer-buttons {
-            margin-top: 1rem;
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-          }
-          .timer-buttons button {
-            background: #DD6CE6;
-            border: none;
-            border-radius: 6px;
-            padding: 8px 15px;
-            font-size: 1rem;
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.3);
-          }
-          .timer-buttons button:hover {
-            background: #AB4CB5;
-            transform: translateY(-2px) scale(1.05);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
-          }
-          .timer-buttons button:active {
-            transform: translateY(0) scale(0.98);
-            box-shadow: 0 3px 10px rgba(0,0,0,0.3);
-          }
-
-          .footer {
-            text-align: center;
-            padding: 1rem;
-            font-size: 1rem;
-            color: white;
-            background: rgba(0,0,0,0.6);
-            border-top: 1px solid rgba(255,255,255,0.2);
-            margin-top: 2rem;
-            font-family: "Lora", serif;
-          }
-          a{
-            cursor:pointer;
-            transition: text-shadow 0.3s ease, font-size 0.2s;
-          }
-          a:hover {
-            text-shadow: 1px 2px 10px white;
-            font-size:18px
-          }
-            #contact-section{
-            text-align: center;
-            padding: 1rem;
-            font-size: 1rem;
-            color: white;
-            background: rgba(0,0,0,0.6);
-            border-top: 1px solid rgba(255,255,255,0.2);
-            margin-top: 2rem;
-            font-family: "Lora", serif;}
-            #contact-section a {
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0,0,0,0.6);
+  padding: 10px 0;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+}
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  margin: 0;
+  padding: 0;
+}
+.navbar ul li a {
   color: white;
   text-decoration: none;
-  transition: text-shadow 0.3s ease, font-size 0.2s;
-  
-}
-
-#contact-section a:hover {
-  text-shadow: 1px 2px 10px white;
+  font-family: "Lora", serif;
   font-size: 18px;
-
-
-/* For small screens like iPhone SE (≤ 375px) */
-
-
-
-.star-rating .star-widget,
-.star-rating .star-widget div,
-.star-rating .star-widget > * {
-  display: flex !important;
-  flex-direction: row !important;
-  align-items: center !important;
+  text-shadow: 1px 2px 10px rgba(0,0,0,0.7);
+  position: relative;
+  transition: color 0.3s ease;
+}
+.navbar ul li a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -3px;
+  left: 0;
+  background-color: white;
+  transition: width 0.3s ease;
+}
+.navbar ul li a:hover::after {
+  width: 100%;
+}
+.navbar ul li a:hover {
+  color: #DD6CE6;
 }
 
-.star-rating div {
-  display: flex !important;
-  flex-direction: row !important;
-  align-items: center !important;
+/* To-Do List Styles */
+ul.todo-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
 }
-
-/* Force each star SVG side by side */
-svg.star-svg {
-  display: inline-block !important;
-  vertical-align: middle !important;
+ul.todo-list li {
+  background: rgba(255,255,255,0.1);
+  padding: 10px 15px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
-
+.todo-title {
+  cursor: default;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-size: 45px;
+  transition: text-shadow 0.3s ease;
 }
-.israa {
-  display: block;           /* Makes it start on its own line */
-  font-size: 1.8rem;        /* Big, like a title */
-  font-weight: bold;         /* Emphasis */
-  color: #FFFFFF;            /* White text */
-  margin-bottom: 5px;        /* Space between title and email */
-  text-shadow: 1px 1px 5px rgba(0,0,0,0.5); /* Optional shadow */
+.todo-title:hover {
+  text-shadow: 1px 2px 10px white;
 }
-
-.israa + a {
-  display: block;           /* Starts on its own line under title */
-  font-size: 1.4rem;        /* Slightly smaller than title */
+.todo-sub {
+  cursor: default;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-size: 20px;
+  transition: text-shadow 0.3s ease;
+}
+.todo-sub:hover {
+  text-shadow: 1px 2px 10px white;
+}
+.input {
+  border-radius: 6px;
+  border: none;
+  background-color: #f5f5f5;
+  padding: 8px 12px;
+  width: 200px;
+  outline: none;
+  transition: box-shadow 0.3s;
+  color: black;
+}
+.input:focus {
+  box-shadow: 0 0 10px #4fa138;
+}
+.todo-btn {
+  background: #DD6CE6;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: white;
   font-weight: bold;
-  color: #FFDD57;           /* Highlight color for email */
-  text-decoration: none;    /* Remove underline */
-  text-shadow: 1px 1px 5px rgba(0,0,0,0.3); /* Subtle shadow */
+  font-size: 20px;
+  margin-left: 5px;
   transition: all 0.3s ease;
 }
+.todo-btn:hover {
+  background: #AB4CB5;
+  transform: translateY(-2px) scale(1.05);
+}
 
-.israa + a:hover {
-  color: #FFD700;           /* Brighter on hover */
-  font-size: 1.45rem;       /* Slight growth on hover */
-  text-shadow: 1px 1px 8px rgba(0,0,0,0.7);
+/* Timer / Chronometer */
+.timer-box {
+  margin-top: 2rem;
+  width: 160px;
+  height: 160px;
+  line-height: 160px;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  color: white;
+  background: rgba(255,255,255,0.1);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+  font-family: "Courier New", Courier, monospace;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+  animation: pulse 1500ms infinite;
+}
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+.timer-box:hover {
+  background: rgba(255,255,255,0.25);
+  animation: none;
+}
+
+.timer-buttons {
+  margin-top: 1rem;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+.timer-buttons button {
+  background: #DD6CE6;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 15px;
+  font-size: 1rem;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+}
+.timer-buttons button:hover {
+  background: #AB4CB5;
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+}
+.timer-buttons button:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+}
+
+/* Sounds buttons */
+.sounds {
+  background: #DD6CE6;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 18px;
+  margin-left: 8px;
+  font-size: 1rem;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+}
+.sounds:hover {
+  background: #E0BCE0;
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+}
+.sounds:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+}
+
+/* Contact / Footer / Misc */
+.footer {
+  text-align: center;
+  padding: 1rem;
+  font-size: 1rem;
+  color: white;
+  background: rgba(0,0,0,0.6);
+  border-top: 1px solid rgba(255,255,255,0.2);
 }
 .contact-card {
-      display: inline-block;
-      text-align: left;
-      background: rgba(255,255,255,0.1);
-      padding: 15px 25px;
-      margin: 10px;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-      transition: transform 0.3s ease, background 0.3s ease;
-    }
-    .contact-card:hover {
-      transform: translateY(-5px);
-      background: rgba(255,255,255,0.2);
-    }
-    .contact-icon {
-      width: 30px;
-      height: 30px;
-      vertical-align: middle;
-      margin-right: 10px;
-    }
-    .contact-name {
-      font-size: 1.5rem;
-      font-weight: bold;
-      display: inline-block;
-      vertical-align: middle;
-    }
-    .contact-label {
-      font-weight: bold;
-      font-size: 1.2rem;
-    }
-    #contact-section a {
-      color: #DD6CE6;
-      font-weight: bold;
-      text-decoration: none;
-      transition: all 0.3s ease;
-    }
-    #contact-section a:hover {
-      color: #AB4CB5;
-      text-shadow: 1px 1px 8px rgba(0,0,0,0.5);
-    }
-     .sounds {
-            background: #DD6CE6;
-            border: none;
-            border-radius: 6px;
-            padding: 8px 18px;
-            margin-left:8px;
-            font-size: 1rem;
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.3);
-          }
-          .sounds:hover {
-            background: #E0BCE0;
-            transform: translateY(-2px) scale(1.05);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
-          }
-          .sounds:active {
-            transform: translateY(0) scale(0.98);
-            box-shadow: 0 3px 10px rgba(0,0,0,0.3);
-          }
-      @media (max-width: 375px) {
-      ul.todo-list li {
-        display: flex !important;
-        flex-direction: row !important;
-        align-items: center !important;
-        justify-content: space-between !important;
-        gap: 8px !important;
-        flex-wrap: wrap;
-      }
+  display: inline-block;
+  text-align: left;
+  background: rgba(255,255,255,0.1);
+  padding: 15px 25px;
+  margin: 10px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+.contact-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255,255,255,0.2);
+}
+.contact-icon {
+  width: 30px;
+  height: 30px;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+.contact-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  display: inline-block;
+  vertical-align: middle;
+}
+.contact-label {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+#contact-section a {
+  color: #DD6CE6;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+#contact-section a:hover {
+  color: #AB4CB5;
+  text-shadow: 1px 1px 8px rgba(0,0,0,0.5);
+}
 
-      .star-rating {
-        display: flex !important;
-        flex-direction: row !important;
-        align-items: center !important;
-        gap: 4px !important;
-      }
-
-      .star-rating > * {
-        display: flex !important;
-        flex-direction: row !important;
-        align-items: center !important;
-      }
-
-      svg.star-svg {
-        display: inline-block !important;
-        vertical-align: middle !important;
-      }
-
-      .star-rating button {
-        margin: 0 !important;
-      }
-
-      ul.todo-list li > span,
-      ul.todo-list li {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-    }
-      
-  /* Navbar stays horizontal */
-  .navbar {
-    padding: 8px 0;
-  }
- 
-  .navbar ul {
-    flex-direction: row; /* Keep in one line */
-    gap: 15px;           /* Small gap between items */
-    justify-content: center;
-  }
-  .navbar ul li a {
-    font-size: 16px;     /* Slightly smaller for mobile */
-    padding: 6px 10px;   /* Touch-friendly */
+/* ========== Mobile / iPhone SE Overrides ========== */
+@media (max-width: 375px) {
+  /* Make tasks list vertical stacking container become horizontal rows */
+  ul.todo-list li {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    flex-wrap: wrap;
   }
 
-  /* Optional hover underline animation remains */
-  .navbar ul li a::after {
-    bottom: -2px;
+  /* Container for rating + buttons in each li */
+  .star-rating {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 4px !important;
   }
 
-  /* Stack To-Do + Chrono vertically */
-  section[style*="display: flex"] {
-    flex-direction: column !important;
-    align-items: center;
-  }
-  #todo-section, #promologue-section {
-    width: 90% !important;
-    margin-bottom: 2rem;
+  /* Also enforce horizontal layout on internal child containers */
+  .star-rating > * {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
   }
 
-  /* Timer & Buttons */
-  .timer-box {
-    width: 140px;
-    height: 140px;
-    line-height: 140px;
-    font-size: 1.6rem;
-  }
-  .timer-buttons button {
-    font-size: 0.9rem;
-    padding: 6px 12px;
+  /* Ensure the star icons (SVG) line up horizontally */
+  svg.star-svg {
+    display: inline-block !important;
+    vertical-align: middle !important;
   }
 
-  /* To-Do List */
-  .todo-title {
-    font-size: 2rem !important;
+  /* Buttons next to stars: avoid stacking */
+  .star-rating button {
+    margin: 0 !important;
   }
-  .todo-sub {
-    font-size: 1rem !important;
+
+  /* Prevent task text from wrapping weirdly */
+  ul.todo-list li,
+  ul.todo-list li > span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
+
+  /* Smaller adjustments on input / buttons */
   .input {
-    width: 80%;
+    width: 60% !important;
+    font-size: 0.9rem;
   }
   .todo-btn {
-    font-size: 18px;
-    padding: 5px 10px;
+    padding: 4px 8px !important;
+    font-size: 16px !important;
   }
-
-  /* Contact Section */
-  #contact-section h3.todo-title {
-    font-size: 1.8rem;
-  }
-  .contact-card {
-    width: 90%;
-    padding: 12px 20px;
-    margin: 10px auto;
-  }
-  .contact-name {
-    font-size: 1.3rem;
-  }
-  .contact-label {
-    font-size: 1rem;
-  }
-  #contact-section a {
-    font-size: 1.2rem;
-  }
-
-  /* Footer */
-  .footer {
-    font-size: 0.9rem;
-    padding: 0.8rem 0;
-  }
-         .sounds {
-    font-size: 0.9rem;
-    padding: 6px 14px;
-    margin: 6px 4px;
-    border-radius: 5px;
+  .timer-buttons button {
+    font-size: 0.9rem !important;
+    padding: 6px 12px !important;
   }
 }
-}
+
 
         `}
       </style>
