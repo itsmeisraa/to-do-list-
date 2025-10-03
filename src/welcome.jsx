@@ -346,6 +346,8 @@ function Welcome() {
         {`
           /* ========== General / Desktop Styles ========== */
 
+/* ========== Base / Desktop Styles ========== */
+
 html {
   scroll-behavior: smooth;
 }
@@ -381,7 +383,7 @@ html {
 .navbar ul li a::after {
   content: '';
   position: absolute;
-  width: 0;
+  width: 0%;
   height: 2px;
   bottom: -3px;
   left: 0;
@@ -411,6 +413,7 @@ ul.todo-list li {
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  gap: 8px;
 }
 .todo-title {
   cursor: default;
@@ -454,7 +457,6 @@ ul.todo-list li {
   color: white;
   font-weight: bold;
   font-size: 20px;
-  margin-left: 5px;
   transition: all 0.3s ease;
 }
 .todo-btn:hover {
@@ -481,14 +483,13 @@ ul.todo-list li {
   animation: pulse 1500ms infinite;
 }
 @keyframes pulse {
-  0%, 100% { transform: scale(1); }
+  0%,100% { transform: scale(1); }
   50% { transform: scale(1.05); }
 }
 .timer-box:hover {
   background: rgba(255,255,255,0.25);
   animation: none;
 }
-
 .timer-buttons {
   margin-top: 1rem;
   display: flex;
@@ -517,7 +518,7 @@ ul.todo-list li {
   box-shadow: 0 3px 10px rgba(0,0,0,0.3);
 }
 
-/* Sounds buttons */
+/* Background / Sounds Buttons */
 .sounds {
   background: #DD6CE6;
   border: none;
@@ -541,7 +542,7 @@ ul.todo-list li {
   box-shadow: 0 3px 10px rgba(0,0,0,0.3);
 }
 
-/* Contact / Footer / Misc */
+/* Contact / Footer */
 .footer {
   text-align: center;
   padding: 1rem;
@@ -591,56 +592,60 @@ ul.todo-list li {
   text-shadow: 1px 1px 8px rgba(0,0,0,0.5);
 }
 
-/* ========== Mobile / iPhone SE Overrides ========== */
+/* ========== Mobile / Small Screen Overrides ========== */
 @media (max-width: 375px) {
-  /* Make tasks list vertical stacking container become horizontal rows */
+  /* Stack main sections vertically */
+  section[style*="display: flex"] {
+    flex-direction: column !important;
+    align-items: center;
+  }
+
+  #todo-section, #promologue-section {
+    width: 90% !important;
+    margin: 1rem 0 !important;
+  }
+
+  /* Task list items stack nicely or partially row if possible */
   ul.todo-list li {
     display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    gap: 8px !important;
-    flex-wrap: wrap;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: center;
+    gap: 6px;
   }
 
-  /* Container for rating + buttons in each li */
   .star-rating {
+    width: 100%;
     display: flex !important;
     flex-direction: row !important;
     align-items: center !important;
-    gap: 4px !important;
+    gap: 4px;
   }
 
-  /* Also enforce horizontal layout on internal child containers */
   .star-rating > * {
     display: flex !important;
     flex-direction: row !important;
     align-items: center !important;
   }
 
-  /* Ensure the star icons (SVG) line up horizontally */
   svg.star-svg {
     display: inline-block !important;
     vertical-align: middle !important;
   }
 
-  /* Buttons next to stars: avoid stacking */
   .star-rating button {
     margin: 0 !important;
   }
 
-  /* Prevent task text from wrapping weirdly */
-  ul.todo-list li,
-  ul.todo-list li > span {
+  ul.todo-list li, ul.todo-list li > span {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
-  /* Smaller adjustments on input / buttons */
   .input {
     width: 60% !important;
-    font-size: 0.9rem;
+    font-size: 0.9rem !important;
   }
   .todo-btn {
     padding: 4px 8px !important;
