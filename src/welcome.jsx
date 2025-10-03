@@ -1,12 +1,51 @@
 import { useEffect, useState, useRef } from 'react';
 import { Typewriter } from 'react-simple-typewriter';
 
-// Sound when Pomodoro finishes
-const alarmSound = new Audio("https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg");
+// Alarm sound (put alarm.mp3 inside /public/sounds or keep the online one)
+const alarmSound = new Audio("/sounds/alarm.mp3");
 
 function Welcome() {
   // -------------------------------
-  // Pomodoro Timer
+  // Pomodoro Timer + Sounds
+  // -------------------------------
+  const rainRef = useRef(new Audio("/sounds/rain.mp3"));
+  const fireRef = useRef(new Audio("/sounds/fire.mp3"));
+  const libraryRef = useRef(new Audio("/sounds/library.mp3"));
+
+  const [currentSound, setCurrentSound] = useState(null);
+
+  // Helper: stop current sound
+  const stopCurrentSound = () => {
+    if (!currentSound) return;
+    const sound =
+      currentSound === "rain" ? rainRef.current :
+      currentSound === "fire" ? fireRef.current :
+      currentSound === "library" ? libraryRef.current :
+      null;
+    if (sound) {
+      sound.pause();
+      sound.currentTime = 0;
+    }
+    setCurrentSound(null);
+  };
+
+  // Play sound (loop)
+  const playSound = (type) => {
+    stopCurrentSound();
+    let sound;
+    if (type === "rain") sound = rainRef.current;
+    if (type === "fire") sound = fireRef.current;
+    if (type === "library") sound = libraryRef.current;
+
+    if (sound) {
+      sound.loop = true; // ✅ keep looping
+      sound.play();
+      setCurrentSound(type);
+    }
+  };
+
+  // -------------------------------
+  // Timer
   // -------------------------------
   const [time, setTime] = useState(() => {
     const savedTime = localStorage.getItem("pomodoroTime");
@@ -15,7 +54,6 @@ function Welcome() {
   const [isRunning, setIsRunning] = useState(() => localStorage.getItem("pomodoroRunning") === "true");
   const timerRef = useRef(null);
 
-  // Synchronize timer
   useEffect(() => {
     if (isRunning) {
       timerRef.current = setInterval(() => {
@@ -23,6 +61,7 @@ function Welcome() {
           if (prev <= 1) {
             clearInterval(timerRef.current);
             alarmSound.play();
+            stopCurrentSound(); // stop sound when finished
             setIsRunning(false);
             return 0;
           }
@@ -35,7 +74,6 @@ function Welcome() {
     return () => clearInterval(timerRef.current);
   }, [isRunning]);
 
-  // Store timer state
   useEffect(() => {
     localStorage.setItem("pomodoroTime", time);
     localStorage.setItem("pomodoroRunning", isRunning);
@@ -47,10 +85,26 @@ function Welcome() {
     return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
   };
 
-  const startTimer = () => setIsRunning(true);
-  const stopTimer = () => setIsRunning(false);
-  const resetTimer = () => setTime(25 * 60);
-  const breakTimer = () => setTime(5 * 60);
+  // --- TIMER ACTIONS ---
+  const startTimer = () => {
+    setIsRunning(true);
+    playSound("rain"); // ✅ auto play rain when starting Pomodoro
+  };
+
+  const stopTimer = () => {
+    setIsRunning(false);
+    stopCurrentSound(); // ✅ stop sound
+  };
+
+  const resetTimer = () => {
+    setTime(25 * 60);
+    stopCurrentSound(); // ✅ stop sound
+  };
+
+  const breakTimer = () => {
+    setTime(5 * 60);
+    stopCurrentSound(); // ✅ stop sound
+  };
 
   // -------------------------------
   // ToDo List
@@ -82,7 +136,6 @@ function Welcome() {
     setTasks(newTasks);
   };
 
-  // Persist tasks
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
@@ -138,7 +191,6 @@ function Welcome() {
   // -------------------------------
   return (
     <div id="vanta-background" style={{ width: '100%', minHeight: '200vh' }}>
-
       {/* Navbar */}
       <nav className="navbar">
         <ul>
@@ -211,8 +263,16 @@ function Welcome() {
             <button onClick={resetTimer}>🔄 Reset</button>
             <button onClick={breakTimer}>☕ Break</button>
           </div>
+
+          <div style={{ marginTop: "1rem", textAlign: "center" }}>
+            <h3 className='todo-sub'>🎶 Background Sounds</h3>
+            <button  className='sounds' onClick={() => playSound("rain")}>🌧 Rain</button>
+            <button className='sounds'  onClick={() => playSound("fire")}>🔥 Fire</button>
+            <button className='sounds'  onClick={() => playSound("library")}>📚 Library</button>
+          </div>
         </div>
       </section>
+
           {/* Contact Section */}
 <div id="contact-section" style={{ marginTop: '2rem', textAlign: 'center', color: 'white' }}>
   <h3 className="todo-title">Contact Me</h3>
@@ -538,11 +598,34 @@ function Welcome() {
       color: #AB4CB5;
       text-shadow: 1px 1px 8px rgba(0,0,0,0.5);
     }
+     .sounds {
+            background: #DD6CE6;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 18px;
+            margin-left:8px;
+            font-size: 1rem;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+          }
+          .sounds:hover {
+            background: #E0BCE0;
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+          }
+          .sounds:active {
+            transform: translateY(0) scale(0.98);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+          }
       @media (max-width: 768px) {
   /* Navbar stays horizontal */
   .navbar {
     padding: 8px 0;
   }
+ 
   .navbar ul {
     flex-direction: row; /* Keep in one line */
     gap: 15px;           /* Small gap between items */
@@ -619,6 +702,13 @@ function Welcome() {
     font-size: 0.9rem;
     padding: 0.8rem 0;
   }
+         .sounds {
+    font-size: 0.9rem;
+    padding: 6px 14px;
+    margin: 6px 4px;
+    border-radius: 5px;
+  }
+}
 }
 
         `}
