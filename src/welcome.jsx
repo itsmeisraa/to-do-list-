@@ -11,6 +11,8 @@ function Welcome() {
   const rainRef = useRef(new Audio("/sounds/rain.mp3"));
   const fireRef = useRef(new Audio("/sounds/fire.mp3"));
   const libraryRef = useRef(new Audio("/sounds/library.mp3"));
+  const forestRef = useRef(new Audio("/sounds/forest.mp3"));
+  const instrumentalRef = useRef(new Audio("/sounds/instrumental.mp3"));
 
   const [currentSound, setCurrentSound] = useState(null);
 
@@ -21,6 +23,8 @@ function Welcome() {
       currentSound === "rain" ? rainRef.current :
       currentSound === "fire" ? fireRef.current :
       currentSound === "library" ? libraryRef.current :
+      currentSound === "forest" ? forestRef.current :
+      currentSound === "instrumental" ? instrumentalRef.current :
       null;
     if (sound) {
       sound.pause();
@@ -36,6 +40,8 @@ function Welcome() {
     if (type === "rain") sound = rainRef.current;
     if (type === "fire") sound = fireRef.current;
     if (type === "library") sound = libraryRef.current;
+    if (type === "forest") sound = forestRef.current;
+    if (type === "instrumental") sound = instrumentalRef.current;
 
     if (sound) {
       sound.loop = true; // ✅ keep looping
@@ -264,12 +270,19 @@ function Welcome() {
             <button onClick={breakTimer}>☕ Break</button>
           </div>
 
+        
           <div style={{ marginTop: "1rem", textAlign: "center" }}>
             <h3 className='todo-sub'>🎶 Background Sounds</h3>
             <button  className='sounds' onClick={() => playSound("rain")}>🌧 Rain</button>
             <button className='sounds'  onClick={() => playSound("fire")}>🔥 Fire</button>
             <button className='sounds'  onClick={() => playSound("library")}>📚 Library</button>
-          </div>
+            <button className='sounds'  onClick={() => playSound("forest")}>🌲 forest</button>
+            <button className='sounds'  onClick={() => playSound("instrumental")}>🎹 instrumental</button>
+           </div>
+           <div className='timer-buttons'>
+            <button onClick={stopCurrentSound}>🔇 </button>
+           </div>
+         
         </div>
       </section>
 
