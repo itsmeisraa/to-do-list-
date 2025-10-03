@@ -566,24 +566,43 @@ function Welcome() {
   font-size: 18px;
 
 
+/* For small screens like iPhone SE (≤ 375px) */
 @media (max-width: 375px) {
-  /* target internal wrapper classes too */
-  .star-widget,
-  .star-widget > *,
-  .react-simple-star-rating,
-  .react-simple-star-rating > * {
+  /* Make each task item horizontal */
+  ul.todo-list li {
     display: flex !important;
     flex-direction: row !important;
     align-items: center !important;
-    justify-content: center !important;
+    justify-content: space-between !important;
   }
 
-  /* and ensure individual stars (SVGs) are inline */
+  /* The container around stars + buttons in each li */
+  .star-rating {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 4px !important;
+  }
+
+  /* Force the internal wrapper(s) of Rating to horizontal */
+  .star-rating > * {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+  }
+
+  /* Ensure stars (SVG) display inline */
   svg.star-svg {
     display: inline-block !important;
     vertical-align: middle !important;
   }
+
+  /* Buttons next to stars: make sure they stay in same row */
+  .star-rating button {
+    margin: 0 !important;
+  }
 }
+
 
 .star-rating .star-widget,
 .star-rating .star-widget div,
