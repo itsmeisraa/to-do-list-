@@ -565,22 +565,22 @@ function Welcome() {
   text-shadow: 1px 2px 10px white;
   font-size: 18px;
 
-@media (max-width: 600px) {
+
+@media (max-width: 375px) {
   .star-rating,
-  .star-rating > *,
-  .star-rating div {
+  .star-rating * {
     display: flex !important;
     flex-direction: row !important;
     align-items: center !important;
     justify-content: center !important;
   }
 
-  /* Ensure the stars themselves (SVGs) are inline elements */
   svg.star-svg {
     display: inline-block !important;
     vertical-align: middle !important;
   }
 }
+
 
 .star-rating .star-widget,
 .star-rating .star-widget div,
