@@ -567,41 +567,7 @@ function Welcome() {
 
 
 /* For small screens like iPhone SE (≤ 375px) */
-@media (max-width: 375px) {
-  /* Make each task item horizontal */
-  ul.todo-list li {
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-  }
 
-  /* The container around stars + buttons in each li */
-  .star-rating {
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    gap: 4px !important;
-  }
-
-  /* Force the internal wrapper(s) of Rating to horizontal */
-  .star-rating > * {
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-  }
-
-  /* Ensure stars (SVG) display inline */
-  svg.star-svg {
-    display: inline-block !important;
-    vertical-align: middle !important;
-  }
-
-  /* Buttons next to stars: make sure they stay in same row */
-  .star-rating button {
-    margin: 0 !important;
-  }
-}
 
 
 .star-rating .star-widget,
@@ -712,6 +678,42 @@ svg.star-svg {
             box-shadow: 0 3px 10px rgba(0,0,0,0.3);
           }
       @media (max-width: 768px) {
+    
+  /* Make each task item horizontal */
+  ul.todo-list li {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+  }
+
+  /* The container around stars + buttons in each li */
+  .star-rating {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 4px !important;
+  }
+
+  /* Force the internal wrapper(s) of Rating to horizontal */
+  .star-rating > * {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+  }
+
+  /* Ensure stars (SVG) display inline */
+  svg.star-svg {
+    display: inline-block !important;
+    vertical-align: middle !important;
+  }
+
+  /* Buttons next to stars: make sure they stay in same row */
+  .star-rating button {
+    margin: 0 !important;
+  }
+}
+
   /* Navbar stays horizontal */
   .navbar {
     padding: 8px 0;
