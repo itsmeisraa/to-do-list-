@@ -677,43 +677,46 @@ svg.star-svg {
             transform: translateY(0) scale(0.98);
             box-shadow: 0 3px 10px rgba(0,0,0,0.3);
           }
-      @media (max-width: 768px) {
-    
-  /* Make each task item horizontal */
-  ul.todo-list li {
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-  }
+      @media (max-width: 375px) {
+      ul.todo-list li {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        gap: 8px !important;
+        flex-wrap: wrap;
+      }
 
-  /* The container around stars + buttons in each li */
-  .star-rating {
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    gap: 4px !important;
-  }
+      .star-rating {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 4px !important;
+      }
 
-  /* Force the internal wrapper(s) of Rating to horizontal */
-  .star-rating > * {
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-  }
+      .star-rating > * {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+      }
 
-  /* Ensure stars (SVG) display inline */
-  svg.star-svg {
-    display: inline-block !important;
-    vertical-align: middle !important;
-  }
+      svg.star-svg {
+        display: inline-block !important;
+        vertical-align: middle !important;
+      }
 
-  /* Buttons next to stars: make sure they stay in same row */
-  .star-rating button {
-    margin: 0 !important;
-  }
-}
+      .star-rating button {
+        margin: 0 !important;
+      }
 
+      ul.todo-list li > span,
+      ul.todo-list li {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+      
   /* Navbar stays horizontal */
   .navbar {
     padding: 8px 0;
