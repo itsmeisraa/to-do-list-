@@ -567,20 +567,23 @@ function Welcome() {
 
 
 @media (max-width: 375px) {
-  .star-rating,
-  .star-rating * {
+  /* target internal wrapper classes too */
+  .star-widget,
+  .star-widget > *,
+  .react-simple-star-rating,
+  .react-simple-star-rating > * {
     display: flex !important;
     flex-direction: row !important;
     align-items: center !important;
     justify-content: center !important;
   }
 
+  /* and ensure individual stars (SVGs) are inline */
   svg.star-svg {
     display: inline-block !important;
     vertical-align: middle !important;
   }
 }
-
 
 .star-rating .star-widget,
 .star-rating .star-widget div,
