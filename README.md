@@ -27,13 +27,4 @@ This is a **React-based web app** combining a To-Do List, Pomodoro Timer, and Co
   - Mobile layout stacks content and adjusts button sizes for touch.
 
 - 🐦 **Animated Background**  
-  - Interactive Vanta.js birds animation behind all sections.
-
----
-
-## Installation
-
-1. Clone this repository:
-
-```bash
-git clone https://github.com/your-username/your-repo.git
+  - Interactive Vanta.js birds animation behind 
