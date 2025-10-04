@@ -261,6 +261,7 @@ function Welcome() {
           fillColor="gold"
           emptyColor="lightgray"
         />
+        <button className="todo-btn" onClick={() => deleteTask(index)}>✅</button>
         <button className="todo-btn" onClick={() => moveUp(index)}>⬆️</button>
         <button className="todo-btn" onClick={() => moveDown(index)}>⬇️</button>
         <button className="todo-btn" onClick={() => deleteTask(index)}>❌</button>
@@ -673,6 +674,7 @@ svg.star-svg {
             border-radius: 6px;
             padding: 8px 18px;
             margin-left:8px;
+            margin-top:8px;
             font-size: 1rem;
             color: white;
             font-weight: bold;
