@@ -1,5 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { Typewriter } from 'react-simple-typewriter';
+import { Rating } from 'react-simple-star-rating';
+
 
 // Alarm sound (put alarm.mp3 inside /public/sounds or keep the online one)
 const alarmSound = new Audio("/sounds/alarm.mp3");
@@ -11,6 +13,8 @@ function Welcome() {
   const rainRef = useRef(new Audio("/sounds/rain.mp3"));
   const fireRef = useRef(new Audio("/sounds/fire.mp3"));
   const libraryRef = useRef(new Audio("/sounds/library.mp3"));
+  const forestRef = useRef(new Audio("/sounds/forest.mp3"));
+  const instrumentalRef = useRef(new Audio("/sounds/instrumental.mp3"));
 
   const [currentSound, setCurrentSound] = useState(null);
 
@@ -21,6 +25,8 @@ function Welcome() {
       currentSound === "rain" ? rainRef.current :
       currentSound === "fire" ? fireRef.current :
       currentSound === "library" ? libraryRef.current :
+      currentSound === "forest" ? forestRef.current :
+      currentSound === "instrumental" ? instrumentalRef.current :
       null;
     if (sound) {
       sound.pause();
@@ -36,6 +42,8 @@ function Welcome() {
     if (type === "rain") sound = rainRef.current;
     if (type === "fire") sound = fireRef.current;
     if (type === "library") sound = libraryRef.current;
+    if (type === "forest") sound = forestRef.current;
+    if (type === "instrumental") sound = instrumentalRef.current;
 
     if (sound) {
       sound.loop = true; // ✅ keep looping
@@ -115,12 +123,13 @@ function Welcome() {
   });
   const [input, setInput] = useState("");
 
-  const addTask = () => {
-    if (input.trim() !== "") {
-      setTasks(prev => [...prev, input]);
-      setInput("");
-    }
-  };
+ const addTask = () => {
+  if (input.trim() !== "") {
+    setTasks(prev => [...prev, { text: input, rating: 0 }]);
+    setInput("");
+  }
+};
+
 
   const deleteTask = (index) => setTasks(prev => prev.filter((_, i) => i !== index));
   const moveUp = (index) => {
@@ -234,17 +243,32 @@ function Welcome() {
             <button onClick={addTask} className="todo-btn">Add</button>
           </div>
           <ul className="todo-list">
-            {tasks.map((task, index) => (
-              <li key={index}>
-                {task}
-                <div>
-                  <button className="todo-btn" onClick={() => moveUp(index)}>⬆️</button>
-                  <button className="todo-btn" onClick={() => moveDown(index)}>⬇️</button>
-                  <button className="todo-btn" onClick={() => deleteTask(index)}>❌</button>
-                </div>
-              </li>
-            ))}
-          </ul>
+  {tasks.map((task, index) => (
+    <li key={index}>
+      {task.text /* instead of just task */}
+      <div className='star-rating' >
+        <Rating 
+          onClick={(rateValue) => {
+            const stars = rateValue / 20;
+            const newTasks = [...tasks];
+            newTasks[index].rating = stars;
+            setTasks(newTasks);
+          }}
+          ratingValue={task.rating * 20}
+          size={20}
+          label={false}
+          transition
+          fillColor="gold"
+          emptyColor="lightgray"
+        />
+        <button className="todo-btn" onClick={() => moveUp(index)}>⬆️</button>
+        <button className="todo-btn" onClick={() => moveDown(index)}>⬇️</button>
+        <button className="todo-btn" onClick={() => deleteTask(index)}>❌</button>
+      </div>
+    </li>
+  ))}
+</ul>
+
         </div>
 
         {/* Right side - Promologue + Timer */}
@@ -264,12 +288,19 @@ function Welcome() {
             <button onClick={breakTimer}>☕ Break</button>
           </div>
 
+        
           <div style={{ marginTop: "1rem", textAlign: "center" }}>
             <h3 className='todo-sub'>🎶 Background Sounds</h3>
             <button  className='sounds' onClick={() => playSound("rain")}>🌧 Rain</button>
             <button className='sounds'  onClick={() => playSound("fire")}>🔥 Fire</button>
             <button className='sounds'  onClick={() => playSound("library")}>📚 Library</button>
-          </div>
+            <button className='sounds'  onClick={() => playSound("forest")}>🌲 forest</button>
+            <button className='sounds'  onClick={() => playSound("instrumental")}>🎹 instrumental</button>
+           </div>
+           <div className='timer-buttons'>
+            <button onClick={stopCurrentSound}>🔇 </button>
+           </div>
+         
         </div>
       </section>
 
@@ -533,6 +564,44 @@ function Welcome() {
 #contact-section a:hover {
   text-shadow: 1px 2px 10px white;
   font-size: 18px;
+
+
+@media (max-width: 375px) {
+  .star-rating,
+  .star-rating * {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  svg.star-svg {
+    display: inline-block !important;
+    vertical-align: middle !important;
+  }
+}
+
+
+.star-rating .star-widget,
+.star-rating .star-widget div,
+.star-rating .star-widget > * {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+}
+
+.star-rating div {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+}
+
+/* Force each star SVG side by side */
+svg.star-svg {
+  display: inline-block !important;
+  vertical-align: middle !important;
+}
+
 }
 .israa {
   display: block;           /* Makes it start on its own line */
